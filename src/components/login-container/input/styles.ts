@@ -11,7 +11,7 @@ interface PropsLabel {
     hasContent: boolean
 }
 
-export const InputLoginStyled = styled.input.attrs(props => ({
+export const InputCheckInStyled = styled.input.attrs(props => ({
     type: props.type
 }))<PropsInput>`
     border-radius: 3px;
@@ -24,17 +24,17 @@ export const InputLoginStyled = styled.input.attrs(props => ({
     font-size: 16px;
     :focus {
         color: #808080;
-        border-color: #E6E6E6;
+        outline: none;
     }
 `
 
-export const ContainerInputLoginStyled = styled.div`
+export const ContainerInputCheckInStyled = styled.div`
     display: flex;
     flex-direction: column;
     position: relative;
     margin-bottom: 16px;
 `
-export const LabelInputLoginStyled = styled.label<PropsLabel>`
+export const LabelInputCheckInStyled = styled.label<PropsLabel>`
     position: absolute;
     transition: font 0.1s ease, transform 0.1s ease;
     color: #808080;
@@ -42,9 +42,10 @@ export const LabelInputLoginStyled = styled.label<PropsLabel>`
     font-size: 16px;
     top: 7px;
     transform: translateY(50%);
-    ${InputLoginStyled}:focus + & {
+    ${InputCheckInStyled}:focus + & {
         transform: translateY(0);
         font-size: 11px;
+        color: #E6E6E6;
         border-color: #E6E6E6;
     }
     ${props =>

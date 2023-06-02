@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from 'react'
-import { ButtonLoginStyled } from './styles'
+import { ButtonCheckInStyled } from './styles'
 
 export interface Props {
     isMobile: boolean
@@ -7,14 +7,14 @@ export interface Props {
     onClick: (e: React.MouseEvent) => void
 }
 
-export const ButtonLogin: FunctionComponent<Props> = ({
+export const ButtonCheckIn: FunctionComponent<Props> = ({
     isMobile,
     onClick,
     ...props
 }) => {
     return (
-        <ButtonLoginStyled isMobile={isMobile} onClick={onClick}>
+        <ButtonCheckInStyled isMobile={isMobile} onClick={onClick}>
             {props.children}
-        </ButtonLoginStyled>
+        </ButtonCheckInStyled>
     )
 }

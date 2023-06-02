@@ -4,7 +4,7 @@ interface Props {
     isMobile: boolean
 }
 
-export const ButtonLoginStyled = styled.button<Props>`
+export const ButtonCheckInStyled = styled.button<Props>`
     background: #C2D8B9;
     border-radius: 4px;
     font-size: 16px;

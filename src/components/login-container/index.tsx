@@ -1,70 +1,73 @@
 import DeviceDetect from '@/utils/deviceDetect'
 import {
     BodyContainerStyled,
-    ContainerLoginStyled,
-    ContentLoginStyled,
-    SubTitleLoginStyled,
-    TitleLoginStyled
+    ContainerCheckInStyled,
+    ContentCheckInStyled,
+    SubTitleCheckInStyled,
+    TitleCheckInStyled
 } from './styles'
-import { InputLogin } from './input'
-import { ButtonLogin } from './button'
+import { InputCheckIn } from './input'
+import { ButtonCheckIn } from './button'
 import { useAuthContext } from '@/contexts/auth'
 import React, { useState } from 'react'
 
-const LoginContainer: React.FC = () => {
+interface Props {
+    setIsChecked: (boolean: boolean) => void
+}
+
+const CheckInContainer: React.FC<Props> = ({setIsChecked}) => {
     const isMobile = DeviceDetect().isMobile
     const { login } = useAuthContext()
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [name, setName] = useState('')
+    const [cpf, setCpf] = useState('')
     
     const handleLogin = async (e:React.MouseEvent) => {
         e.preventDefault()
-        const teste = await login(email, password)
-        console.log(teste);
-        
+        setIsChecked(true)
+        const teste = await login(name, cpf)
     }
 
     const handleChangeEmail = (e:React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
-        setEmail(e.target.value)
+        setName(e.target.value)
     }
 
     const handleChangePassword = (e:React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
-        setPassword(e.target.value)
+        setCpf(e.target.value)
     }
+
     return (
         <BodyContainerStyled isMobile={isMobile}>
-            <ContainerLoginStyled isMobile={isMobile}>
-                <ContentLoginStyled isMobile={isMobile}>
-                    <TitleLoginStyled>Seja Bem-Vindo!</TitleLoginStyled>
-
-                    <SubTitleLoginStyled>Complete Seus Dados Para Fazer Check-In</SubTitleLoginStyled>
-                    <InputLogin
+            <ContainerCheckInStyled isMobile={isMobile}>
+                <ContentCheckInStyled isMobile={isMobile}>
+                    <TitleCheckInStyled>Seja Bem-Vindo!</TitleCheckInStyled>
+                    <SubTitleCheckInStyled>Complete Seus Dados Para Fazer Check-In</SubTitleCheckInStyled>
+                    <InputCheckIn
                         isMobile={isMobile}
                         label="Nome"
-                        value = {email}
-                        id="inputLoginMail"
+                        value = {name}
+                        id="inputName"
                         type="text"
                         onChangeInput={(e) => handleChangeEmail(e)}
                     />
-                    <InputLogin
+                    <InputCheckIn
                         isMobile={isMobile}
                         label="CPF"
-                        value = {password}
-                        id="inputLoginPassword"
+                        value = {cpf}
+                        id="inputCpf"
                         type="text"
                         onChangeInput={(e) => handleChangePassword(e)}
                     />
-                    <ButtonLogin
+                    <ButtonCheckIn
                         isMobile={isMobile}
                         onClick={(e) => handleLogin(e)}
                     >
                         Check-In
-                    </ButtonLogin>
-                </ContentLoginStyled>
-            </ContainerLoginStyled>
+                    </ButtonCheckIn>
+                </ContentCheckInStyled>
+            </ContainerCheckInStyled>
         </BodyContainerStyled>
     )
 }
-export default LoginContainer
+export default CheckInContainer

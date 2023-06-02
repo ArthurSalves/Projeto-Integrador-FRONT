@@ -1,8 +1,8 @@
 import { FunctionComponent, useState } from 'react'
 import {
-    ContainerInputLoginStyled,
-    InputLoginStyled,
-    LabelInputLoginStyled
+    ContainerInputCheckInStyled,
+    InputCheckInStyled,
+    LabelInputCheckInStyled
 } from './styles'
 
 export interface Props {
@@ -15,7 +15,7 @@ export interface Props {
 }
 
 
-export const InputLogin: FunctionComponent<Props> = ({
+export const InputCheckIn: FunctionComponent<Props> = ({
     isMobile,
     label,
     onChangeInput,
@@ -27,20 +27,20 @@ export const InputLogin: FunctionComponent<Props> = ({
     }
 
     return (
-        <ContainerInputLoginStyled>
-            <InputLoginStyled
+        <ContainerInputCheckInStyled>
+            <InputCheckInStyled
                 isMobile={isMobile}
                 hasContent={!!props.value}
                 onChange={(e) => handleChangeIput(e)}
                 {...props}
             />
-            <LabelInputLoginStyled
+            <LabelInputCheckInStyled
                 isMobile={isMobile}
                 hasContent={!!props.value}
                 htmlFor={props.id}
             >
                 {label}
-            </LabelInputLoginStyled>
-        </ContainerInputLoginStyled>
+            </LabelInputCheckInStyled>
+        </ContainerInputCheckInStyled>
     )
 }

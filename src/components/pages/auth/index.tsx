@@ -1,5 +1,5 @@
 import Layout from '@/components/layout'
-import LoginContainer from '@/components/login-container'
+import CheckInContainer from '@/components/login-container'
 import DeviceDetect from '@/utils/deviceDetect'
 import {
     AuthScreenStyled,
@@ -9,13 +9,17 @@ import {
 } from './styles'
 import { FunctionComponent } from 'react'
 
-const AuthScreen: FunctionComponent = () => {
+interface Props {
+    setIsChecked: (e: boolean) => void
+}
+
+const AuthScreen: FunctionComponent<Props> = ({setIsChecked}) => {
     const isMobile = DeviceDetect().isMobile
     return (
         <Layout isMobile={isMobile}>
             <AuthScreenStyled src="/images/hero.jpg">
                 <BackgroundLayerStyled>
-                    <LoginContainer />
+                    <CheckInContainer setIsChecked = {setIsChecked}/>
                 </BackgroundLayerStyled>
             </AuthScreenStyled>
         </Layout>

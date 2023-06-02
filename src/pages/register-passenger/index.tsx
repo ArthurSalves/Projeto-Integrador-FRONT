@@ -1,9 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next'
-import AuthScreen from '@/components/pages/auth'
-import DeviceDetect, { detectContextMobile } from '@/utils/deviceDetect'
-import { useAuthContext } from '@/contexts/auth'
 
-const Home: NextPage = () => {
+const RegisterPassenger: NextPage = () => {
     
     return <div>Olá</div>
 }
@@ -25,4 +22,4 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
         }
       }
 }
-export default Home
+export default RegisterPassenger

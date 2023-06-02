@@ -1,25 +1,16 @@
 import { GetServerSideProps, NextPage } from 'next'
 import AuthScreen from '@/components/pages/auth'
+import { useState } from 'react'
+import CheckScreen from '@/components/pages/check'
+
+
 
 const Auth: NextPage = () => {
-    
-    return <AuthScreen />
+
+  const [isChecked, setIsChecked] = useState(false)
+
+  return isChecked ? <CheckScreen text='Check-In Concluído!'/> : <AuthScreen setIsChecked = {setIsChecked}/> 
+     
 }
 
-export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
-    
-    if (req.cookies.auth) {
-        return {
-          redirect: {
-            permanent: false,
-            destination: '/profiles'
-          }
-        }
-      }
-    return {
-        props: {
-            isMobile: false
-        }
-      }
-}
 export default Auth
