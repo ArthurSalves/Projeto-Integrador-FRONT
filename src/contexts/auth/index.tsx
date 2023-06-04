@@ -37,12 +37,6 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
         }
     }, [])
 
-    useEffect(() => {
-        if(!accessToken){
-            Router.push('/check-in')
-        }
-    }, [accessToken])
-
     const handleLogin = useCallback(async (email: string, password: string) => {
         const result = await AuthService.auth(email, password)
         if (result instanceof Error) {
@@ -62,8 +56,7 @@ export const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
         setAccessToken(undefined)
     }, [])
 
-
-    const isAuthenticated = useMemo(() => !!accessToken, [accessToken]) 
+    const isAuthenticated = useMemo(() => !!accessToken, [accessToken])
 
     return (
         <AuthContext.Provider

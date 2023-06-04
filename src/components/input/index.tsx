@@ -9,19 +9,17 @@ export interface Props {
     isMobile: boolean
     label: string
     id: string
-    onChangeInput: (e:React.ChangeEvent<HTMLInputElement>) => void
+    onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void
     type: string
     value: string
 }
 
-
-export const InputCheckIn: FunctionComponent<Props> = ({
+export const DefaultInput: FunctionComponent<Props> = ({
     isMobile,
     label,
     onChangeInput,
     ...props
 }) => {
-    
     const handleChangeIput = (e: React.ChangeEvent<HTMLInputElement>) => {
         onChangeInput(e)
     }
@@ -31,7 +29,7 @@ export const InputCheckIn: FunctionComponent<Props> = ({
             <InputCheckInStyled
                 isMobile={isMobile}
                 hasContent={!!props.value}
-                onChange={(e) => handleChangeIput(e)}
+                onChange={e => handleChangeIput(e)}
                 {...props}
             />
             <LabelInputCheckInStyled

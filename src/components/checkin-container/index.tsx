@@ -6,8 +6,8 @@ import {
     SubTitleCheckInStyled,
     TitleCheckInStyled
 } from './styles'
-import { InputCheckIn } from './input'
-import { ButtonCheckIn } from './button'
+import { DefaultInput } from '../input'
+import { ButtonCheckIn } from '../button'
 import { useAuthContext } from '@/contexts/auth'
 import React, { useState } from 'react'
 
@@ -15,24 +15,23 @@ interface Props {
     setIsChecked: (boolean: boolean) => void
 }
 
-const CheckInContainer: React.FC<Props> = ({setIsChecked}) => {
+const CheckInContainer: React.FC<Props> = ({ setIsChecked }) => {
     const isMobile = DeviceDetect().isMobile
     const { login } = useAuthContext()
     const [name, setName] = useState('')
     const [cpf, setCpf] = useState('')
-    
-    const handleLogin = async (e:React.MouseEvent) => {
+
+    const handleLogin = async (e: React.MouseEvent) => {
         e.preventDefault()
         setIsChecked(true)
-        const teste = await login(name, cpf)
     }
 
-    const handleChangeEmail = (e:React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
         setName(e.target.value)
     }
 
-    const handleChangePassword = (e:React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
         setCpf(e.target.value)
     }
@@ -42,26 +41,28 @@ const CheckInContainer: React.FC<Props> = ({setIsChecked}) => {
             <ContainerCheckInStyled isMobile={isMobile}>
                 <ContentCheckInStyled isMobile={isMobile}>
                     <TitleCheckInStyled>Seja Bem-Vindo!</TitleCheckInStyled>
-                    <SubTitleCheckInStyled>Complete Seus Dados Para Fazer Check-In</SubTitleCheckInStyled>
-                    <InputCheckIn
+                    <SubTitleCheckInStyled>
+                        Complete Seus Dados Para Fazer Check-In
+                    </SubTitleCheckInStyled>
+                    <DefaultInput
                         isMobile={isMobile}
                         label="Nome"
-                        value = {name}
+                        value={name}
                         id="inputName"
                         type="text"
-                        onChangeInput={(e) => handleChangeEmail(e)}
+                        onChangeInput={e => handleChangeEmail(e)}
                     />
-                    <InputCheckIn
+                    <DefaultInput
                         isMobile={isMobile}
                         label="CPF"
-                        value = {cpf}
+                        value={cpf}
                         id="inputCpf"
                         type="text"
-                        onChangeInput={(e) => handleChangePassword(e)}
+                        onChangeInput={e => handleChangePassword(e)}
                     />
                     <ButtonCheckIn
                         isMobile={isMobile}
-                        onClick={(e) => handleLogin(e)}
+                        onClick={e => handleLogin(e)}
                     >
                         Check-In
                     </ButtonCheckIn>
