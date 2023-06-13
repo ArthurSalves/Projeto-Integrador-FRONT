@@ -8,9 +8,9 @@ import {
 } from './styles'
 import { DefaultInput } from '../input'
 import { ButtonCheckIn } from '../button'
-import { useAuthContext } from '@/contexts/auth'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { DropBox } from '../drop-box'
+import { RouteService } from '@/service/api/route'
 
 interface Props {
     setIsChecked: (boolean: boolean) => void
@@ -19,7 +19,7 @@ interface Props {
 const RegisterRouteContainer: React.FC<Props> = ({ setIsChecked }) => {
     const [cpf, setCpf] = useState('')
     const [name, setName] = useState('')
-    const { login } = useAuthContext()
+    const [companies, setCompanies] = useState([])
     const isMobile = DeviceDetect().isMobile
 
     const handleLogin = async (e: React.MouseEvent) => {
@@ -36,7 +36,22 @@ const RegisterRouteContainer: React.FC<Props> = ({ setIsChecked }) => {
         e.preventDefault()
         setCpf(e.target.value)
     }
-    const teste = [{ value: 'teste', label: 'teste' }]
+
+    const buildOptions = (companies: Array<any>) => {
+        return companies.map(companie => {
+            return { value: companie.nome, label: companie.nome }
+        })
+    }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const companies = await RouteService.getCompanies()
+            console.log(buildOptions(companies))
+
+            // setCompanies(buildOptions(companies))
+        }
+        fetchData()
+    }, [])
 
     return (
         <BodyContainerStyled isMobile={isMobile}>
@@ -59,14 +74,14 @@ const RegisterRouteContainer: React.FC<Props> = ({ setIsChecked }) => {
                         label="Empresa"
                         value={cpf}
                         id="inputEmpresa"
-                        options={teste}
+                        options={companies}
                         onChangeInput={e => handleChangeEmpresa(e)}
                     />
                     <ButtonCheckIn
                         isMobile={isMobile}
                         onClick={e => handleLogin(e)}
                     >
-                        Check-In
+                        Cadastrar
                     </ButtonCheckIn>
                 </ContentRouteStyled>
             </ContainerRouteStyled>

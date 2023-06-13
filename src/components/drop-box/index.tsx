@@ -33,21 +33,20 @@ export const DropBox: FunctionComponent<Props> = ({
     return (
         <ContainerInputCheckInStyled>
             <SelectStyled onChange={e => handleChangeIput(e)} {...props}>
-                {options.map((option, index) => {
-                    return (
-                        <option id={index.toString()} value={option.value}>
-                            {option.label}
-                        </option>
-                    )
-                })}
+                {options?.length
+                    ? options?.map((option, index) => {
+                          return (
+                              <option
+                                  key={index}
+                                  id={index.toString()}
+                                  value={option.value}
+                              >
+                                  {option.label}
+                              </option>
+                          )
+                      })
+                    : null}
             </SelectStyled>
-            <LabelInputCheckInStyled
-                isMobile={isMobile}
-                hasContent={!!props.value}
-                htmlFor={props.id}
-            >
-                {label}
-            </LabelInputCheckInStyled>
         </ContainerInputCheckInStyled>
     )
 }

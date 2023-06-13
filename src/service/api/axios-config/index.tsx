@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from 'axios'
 
-import { responseInterceptor, errorInterceptor } from './interceptors';
+import { responseInterceptor, errorInterceptor } from './interceptors'
 
 import getConfig from 'next/config'
 
@@ -19,10 +19,7 @@ const runtimeEnvironment = () => {
 }
 
 const Api = axios.create({
-  baseURL: runtimeEnvironment().publicRuntimeConfig.BACK_HOST,
-  withCredentials: true
-});
+    baseURL: runtimeEnvironment().publicRuntimeConfig.BACK_HOST
+})
 
-
-
-export { Api };
+export { Api }

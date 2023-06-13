@@ -1,8 +1,7 @@
 import Layout from '@/components/layout'
 import DeviceDetect from '@/utils/deviceDetect'
-import { BackgroundLayerStyled } from './styles'
 import { FunctionComponent } from 'react'
-import RegisterPassengerContainer from '@/components/register-passenger-container'
+import { TitleStyled } from './styles'
 
 interface Props {
     setIsChecked: (e: boolean) => void
@@ -13,9 +12,7 @@ const RegisterRouteScreen: FunctionComponent<Props> = ({ setIsChecked }) => {
 
     return (
         <Layout isMobile={isMobile}>
-            <BackgroundLayerStyled>
-                <RegisterPassengerContainer setIsChecked={setIsChecked} />
-            </BackgroundLayerStyled>
+            <TitleStyled>Detalhe do Passageiro</TitleStyled>
         </Layout>
     )
 }

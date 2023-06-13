@@ -10,9 +10,10 @@ export const SelectStyled = styled.select`
     border-color: #e6e6e6;
     border-style: solid;
     color: #808080;
-    height: 30px;
+    border-width: 2px;
+    height: 50px;
     line-height: 50px;
-    padding: 16px 20px 0;
+    padding: 0 16px;
     font-size: 16px;
     :focus {
         color: #808080;
