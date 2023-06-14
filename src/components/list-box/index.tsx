@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { UlStyled, LiStyled } from './styles'
 import { NameButton } from '../name-button'
 
-interface Passenger {
+interface PassengerType {
     _id: string
     nome: string
     cpf: string
@@ -10,18 +10,32 @@ interface Passenger {
     codigoFuncionario: string
 }
 
-interface Props {
-    itens: [Passenger] | null
+interface CompanieType {
+    _id: string
+    nome: string
 }
 
-export const ListBox: FunctionComponent<Props> = ({ itens, ...props }) => {
+interface RouteType {
+    _id: string
+    nome: string
+    passageiros: [PassengerType]
+    empresa: [CompanieType]
+}
+
+interface Props {
+    itens: [PassengerType | RouteType] | null
+    hasCheckBox: boolean
+    listType: string
+}
+
+export const ListBox: FunctionComponent<Props> = ({ itens, hasCheckBox, listType, ...props }) => {
     return (
         <UlStyled>
             {itens?.map(item => {
                 return (
                     <LiStyled key={item._id}>
-                        <NameButton item={item} />
-                        <div className="checkbox-wrapper-7">
+                        <NameButton item={item} listType={listType}/>
+                        {hasCheckBox && <div className="checkbox-wrapper-7">
                             <input
                                 className="tgl tgl-ios"
                                 id={item._id.toString()}
@@ -31,7 +45,8 @@ export const ListBox: FunctionComponent<Props> = ({ itens, ...props }) => {
                                 className="tgl-btn"
                                 htmlFor={item._id.toString()}
                             />
-                        </div>
+                        </div>}
+                        
                     </LiStyled>
                 )
             })}

@@ -10,23 +10,41 @@ interface Passenger {
     codigoFuncionario: string
 }
 
-interface Props {
-    item: Passenger | null
+interface CompanieType {
+    _id: string
+    nome: string
 }
 
-const handleChangeButton = (codigo: any, e: any) => {
+interface Props {
+    item: Passenger | CompanieType | null
+    listType: string
+}
+
+const isPassenger = (type: string) => {
+    return type === 'passenger'
+}
+
+const handleChangeButton = (item: Passenger | CompanieType, e: any, type: string) => {
     e.preventDefault()
 
-    Router.push({
-        pathname: 'passenger-detail',
-        query: { codigoFuncionario: codigo }
-    })
+    if(isPassenger(type)){
+        Router.push({
+            pathname: 'passenger-detail',
+            query: { codigoFuncionario: item.codigoFuncionario }
+        })
+    }else {
+        Router.push({
+            pathname: 'route-detail',
+            query: { id: item._id }
+        })
+    }
+
 }
 
-export const NameButton: FunctionComponent<Props> = ({ item, ...props }) => {
+export const NameButton: FunctionComponent<Props> = ({ item, listType,  ...props }) => {
     return (
         <NameButtonStyled
-            onClick={e => handleChangeButton(item?.codigoFuncionario, e)}
+            onClick={e => handleChangeButton(item, e, listType)}
         >
             {item?.nome}
         </NameButtonStyled>

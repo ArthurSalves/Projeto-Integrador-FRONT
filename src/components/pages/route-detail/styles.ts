@@ -18,6 +18,15 @@ export const TextStyledBlue = styled.p`
     line-height: 40px;
 `
 
+export const TextStyled = styled.p`
+    color: #A1B5D8;
+    font-size: 18px;
+    font-weight: 500;
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 40px;
+`
+
 
 export const TextStyledDarkBlue = styled.p`
     color: #808080;

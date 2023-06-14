@@ -9,18 +9,17 @@ import {
 import { FunctionComponent, useEffect, useState } from 'react'
 import { ListBox } from '@/components/list-box'
 import { PassengerService } from '@/service/api/passenger'
+import { RouteService } from '@/service/api/route'
 
-const ListPassengersScreen: FunctionComponent = () => {
+const ListRoutesScreen: FunctionComponent = () => {
     const isMobile = DeviceDetect().isMobile
-    const [passengers, setPassengers] = useState(null)
-
-    const [deletedPassenger, setDeletedPassenger] = useState()
+    const [routes, setRoutes] = useState(null)
 
     useEffect(() => {
         const fetchData = async () => {
-            const passengers = await PassengerService.getPassenger('Arthur')
+            const passengers = await RouteService.getRoutes()
 
-            setPassengers(passengers)
+            setRoutes(passengers)
         }
         fetchData()
     }, [])
@@ -31,13 +30,13 @@ const ListPassengersScreen: FunctionComponent = () => {
                 <ContainerStyled isMobile={isMobile}>
                     <ContentStyled isMobile={isMobile}>
                         <TitleStyled>
-                            Lista de <br /> Passageiros
+                            Lista de Rotas
                         </TitleStyled>
-                        <ListBox itens={passengers} hasCheckBox={true} listType='passenger'/>
+                        <ListBox itens={routes} hasCheckBox={false} listType='route' />
                     </ContentStyled>
                 </ContainerStyled>
             </BodyContainerStyled>
         </Layout>
     )
 }
-export default ListPassengersScreen
+export default ListRoutesScreen

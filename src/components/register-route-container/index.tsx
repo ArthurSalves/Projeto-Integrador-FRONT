@@ -17,14 +17,16 @@ interface Props {
 }
 
 const RegisterRouteContainer: React.FC<Props> = ({ setIsChecked }) => {
-    const [cpf, setCpf] = useState('')
+    const [companieSelected, setCompanieSelected] = useState('')
+    const [companieSelectedId, setCompanieSelectedId] = useState(null)
     const [name, setName] = useState('')
+    const [companiesFiltered, setCompaniesFiltered] = useState([])
     const [companies, setCompanies] = useState([])
     const isMobile = DeviceDetect().isMobile
 
     const handleLogin = async (e: React.MouseEvent) => {
         e.preventDefault()
-        setIsChecked(true)
+        RouteService.postRoute(name, companieSelectedId)
     }
 
     const handleChangeRouteName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +36,12 @@ const RegisterRouteContainer: React.FC<Props> = ({ setIsChecked }) => {
 
     const handleChangeEmpresa = (e: React.ChangeEvent<HTMLSelectElement>) => {
         e.preventDefault()
-        setCpf(e.target.value)
+        setCompanieSelected(e.target.value)
+        const idCompanie = companies.find( (companie) => {
+            return companie.nome === e.target.value
+        })
+        setCompanieSelectedId(idCompanie)
+        
     }
 
     const buildOptions = (companies: Array<any>) => {
@@ -46,9 +53,8 @@ const RegisterRouteContainer: React.FC<Props> = ({ setIsChecked }) => {
     useEffect(() => {
         const fetchData = async () => {
             const companies = await RouteService.getCompanies()
-            console.log(buildOptions(companies))
-
-            // setCompanies(buildOptions(companies))
+            setCompaniesFiltered(buildOptions(companies))
+            setCompanies(companies)
         }
         fetchData()
     }, [])
@@ -72,9 +78,9 @@ const RegisterRouteContainer: React.FC<Props> = ({ setIsChecked }) => {
                     <DropBox
                         isMobile={isMobile}
                         label="Empresa"
-                        value={cpf}
+                        value={companieSelected}
                         id="inputEmpresa"
-                        options={companies}
+                        options={companiesFiltered}
                         onChangeInput={e => handleChangeEmpresa(e)}
                     />
                     <ButtonCheckIn

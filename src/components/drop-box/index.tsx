@@ -46,6 +46,15 @@ export const DropBox: FunctionComponent<Props> = ({
                           )
                       })
                     : null}
+                             <option
+                                  key={0}
+                                  selected
+                                  disabled
+                                  hidden
+                                  value={''}
+                              >
+                                  {''}
+                              </option>
             </SelectStyled>
         </ContainerInputCheckInStyled>
     )

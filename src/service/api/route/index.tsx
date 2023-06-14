@@ -12,7 +12,7 @@ const getCompanies = async (): Promise<any | Error> => {
             return data.data
         }
 
-        return new Error('Erro no login.')
+        return new Error('Erro.')
     } catch (error) {
         return new Error(
             (error as { message: string }).message || 'Erro ao buscar empresas.'
@@ -20,6 +20,58 @@ const getCompanies = async (): Promise<any | Error> => {
     }
 }
 
+const getRoutes = async (): Promise<any | Error> => {
+    try {
+        const data = await Api.get('/rota')
+
+        if (data.data) {
+            return data.data
+        }
+
+        return new Error('Erro.')
+    } catch (error) {
+        return new Error(
+            (error as { message: string }).message || 'Erro ao buscar rota.'
+        )
+    }
+}
+
+const getRouteById = async (id: string): Promise<any | Error> => {
+    try {
+        const data = await Api.get(`/rota/${id}`)
+
+        if (data.data) {
+            return data.data
+        }
+
+        return new Error('Erro.')
+    } catch (error) {
+        return new Error(
+            (error as { message: string }).message || 'Erro ao buscar rota.'
+        )
+    }
+}
+
+
+const postRoute = async (routeName: string, companieName: string): Promise<any | Error> => {
+    try {
+        const data = await Api.post('/rota', {nome: routeName, infos: {empresa: {nome: companieName}}})
+
+        if (data.data) {
+            return data.data
+        }
+
+        return new Error('Erro.')
+    } catch (error) {
+        return new Error(
+            (error as { message: string }).message || 'Erro ao cadastrar rota.'
+        )
+    }
+}
+
 export const RouteService = {
-    getCompanies
+    getCompanies,
+    getRoutes,
+    getRouteById,
+    postRoute
 }
