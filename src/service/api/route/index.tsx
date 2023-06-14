@@ -52,10 +52,15 @@ const getRouteById = async (id: string): Promise<any | Error> => {
     }
 }
 
-
-const postRoute = async (routeName: string, companieName: string): Promise<any | Error> => {
+const postRoute = async (
+    routeName: string,
+    companieId: string
+): Promise<any | Error> => {
     try {
-        const data = await Api.post('/rota', {nome: routeName, infos: {empresa: {nome: companieName}}})
+        const data = await Api.post('/rota', {
+            nome: routeName,
+            empresa: companieId
+        })
 
         if (data.data) {
             return data.data
@@ -69,9 +74,59 @@ const postRoute = async (routeName: string, companieName: string): Promise<any |
     }
 }
 
+const postCompanie = async (companieName: string): Promise<any | Error> => {
+    try {
+        const data = await Api.post('/empresa/criar', {
+            nome: companieName
+        })
+
+        if (data.data) {
+            return data.data
+        }
+
+        return new Error('Erro.')
+    } catch (error) {
+        return new Error(
+            (error as { message: string }).message ||
+                'Erro ao cadastrar empresa.'
+        )
+    }
+}
+
+const postPassengers = async (
+    passengerName: string,
+    passengerCpf: string,
+    endereco: string,
+    empresa: string,
+    codigoFuncionario: string
+): Promise<any | Error> => {
+    try {
+        const data = await Api.post('/passageiro', {
+            nome: passengerName,
+            cpf: passengerCpf,
+            codigoFuncionario,
+            empresa,
+            endereco
+        })
+
+        if (data.data) {
+            return data.data
+        }
+
+        return new Error('Erro.')
+    } catch (error) {
+        return new Error(
+            (error as { message: string }).message ||
+                'Erro ao cadastrar passageiros.'
+        )
+    }
+}
+
 export const RouteService = {
     getCompanies,
-    getRoutes,
     getRouteById,
+    getRoutes,
+    postCompanie,
+    postPassengers,
     postRoute
 }

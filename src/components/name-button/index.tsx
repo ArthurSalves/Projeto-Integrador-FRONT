@@ -24,28 +24,33 @@ const isPassenger = (type: string) => {
     return type === 'passenger'
 }
 
-const handleChangeButton = (item: Passenger | CompanieType, e: any, type: string) => {
+const handleChangeButton = (
+    item: Passenger | CompanieType,
+    e: any,
+    type: string
+) => {
     e.preventDefault()
 
-    if(isPassenger(type)){
+    if (isPassenger(type)) {
         Router.push({
             pathname: 'passenger-detail',
             query: { codigoFuncionario: item.codigoFuncionario }
         })
-    }else {
+    } else {
         Router.push({
             pathname: 'route-detail',
             query: { id: item._id }
         })
     }
-
 }
 
-export const NameButton: FunctionComponent<Props> = ({ item, listType,  ...props }) => {
+export const NameButton: FunctionComponent<Props> = ({
+    item,
+    listType,
+    ...props
+}) => {
     return (
-        <NameButtonStyled
-            onClick={e => handleChangeButton(item, e, listType)}
-        >
+        <NameButtonStyled onClick={e => handleChangeButton(item, e, listType)}>
             {item?.nome}
         </NameButtonStyled>
     )

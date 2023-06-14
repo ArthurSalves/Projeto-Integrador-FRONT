@@ -17,8 +17,7 @@ interface Props {
 }
 
 const RegisterRouteContainer: React.FC<Props> = ({ setIsChecked }) => {
-    const [companieSelected, setCompanieSelected] = useState('')
-    const [companieSelectedId, setCompanieSelectedId] = useState(null)
+    const [companieSelectedId, setCompanieSelectedId] = useState('')
     const [name, setName] = useState('')
     const [companiesFiltered, setCompaniesFiltered] = useState([])
     const [companies, setCompanies] = useState([])
@@ -27,6 +26,7 @@ const RegisterRouteContainer: React.FC<Props> = ({ setIsChecked }) => {
     const handleLogin = async (e: React.MouseEvent) => {
         e.preventDefault()
         RouteService.postRoute(name, companieSelectedId)
+        setIsChecked(true)
     }
 
     const handleChangeRouteName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,17 +36,12 @@ const RegisterRouteContainer: React.FC<Props> = ({ setIsChecked }) => {
 
     const handleChangeEmpresa = (e: React.ChangeEvent<HTMLSelectElement>) => {
         e.preventDefault()
-        setCompanieSelected(e.target.value)
-        const idCompanie = companies.find( (companie) => {
-            return companie.nome === e.target.value
-        })
-        setCompanieSelectedId(idCompanie)
-        
+        setCompanieSelectedId(e.target.value)
     }
 
-    const buildOptions = (companies: Array<any>) => {
-        return companies.map(companie => {
-            return { value: companie.nome, label: companie.nome }
+    const buildOptions = (companies: any) => {
+        return companies.map((companie: any) => {
+            return { value: companie._id.toString(), label: companie.nome }
         })
     }
 
@@ -63,7 +58,7 @@ const RegisterRouteContainer: React.FC<Props> = ({ setIsChecked }) => {
         <BodyContainerStyled isMobile={isMobile}>
             <ContainerRouteStyled isMobile={isMobile}>
                 <ContentRouteStyled isMobile={isMobile}>
-                    <TitleRouteStyled>Casdastrar Rota</TitleRouteStyled>
+                    <TitleRouteStyled>Cadastrar Rota</TitleRouteStyled>
                     <SubTitleRouteStyled>
                         Preencha os Dados da Rota
                     </SubTitleRouteStyled>
@@ -78,7 +73,7 @@ const RegisterRouteContainer: React.FC<Props> = ({ setIsChecked }) => {
                     <DropBox
                         isMobile={isMobile}
                         label="Empresa"
-                        value={companieSelected}
+                        value={companieSelectedId}
                         id="inputEmpresa"
                         options={companiesFiltered}
                         onChangeInput={e => handleChangeEmpresa(e)}

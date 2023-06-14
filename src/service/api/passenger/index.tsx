@@ -1,6 +1,8 @@
 import { Api } from '../axios-config'
 
-const getPassenger = async (infoPassenger: string): Promise<any | Error> => {
+const getPassenger = async (
+    infoPassenger: string | undefined
+): Promise<any | Error> => {
     try {
         const data = await Api.get(`/passageiro/${infoPassenger}`)
 
