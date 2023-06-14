@@ -1,8 +1,8 @@
-import ListPassengersScreen from '@/components/pages/list-passengers'
+import PassegerDetailScreen from '@/components/pages/passenger-detail'
 import { NextPage } from 'next'
 
 const PassengerDetail: NextPage = () => {
-    return <ListPassengersScreen />
+    return <PassegerDetailScreen />
 }
 
 export default PassengerDetail

@@ -14,6 +14,8 @@ const ListPassengersScreen: FunctionComponent = () => {
     const isMobile = DeviceDetect().isMobile
     const [passengers, setPassengers] = useState(null)
 
+    const [deletedPassenger, setDeletedPassenger] = useState()
+
     useEffect(() => {
         const fetchData = async () => {
             const passengers = await PassengerService.getPassenger('Arthur')
