@@ -2,18 +2,21 @@ import styled from "styled-components";
 
 
 export const NavBarContainerStyled = styled.div`
+    background: #636161;
+    font-weight: bold;
+    justify-content: center;
+    text-align: center; 
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 68px;
+    height: 38px;
     display: flex;
     flex-direction: row;
     align-items: center;
     padding-left: 50px;
     padding-right: 50px;
     -webkit-font-smoothing: antialiased;
-    background-image: linear-gradient(180deg,rgba(0,0,0,.7) 10%,transparent);
     color: white;
     z-index: 2;
 `

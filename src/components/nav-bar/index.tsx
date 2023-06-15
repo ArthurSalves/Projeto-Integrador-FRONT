@@ -1,22 +1,20 @@
 import {
-    LogoStyled,
     NavBarContainerStyled,
     NavBarContentStyled,
     NavBarItemStyled
 } from './styles'
 import React from 'react'
+import { useRouter } from 'next/router'
 
 const NavBar: React.FC = () => {
+    const router = useRouter()
+
     return (
         <NavBarContainerStyled>
-            <LogoStyled src="/images/logo.png" />
-            <NavBarContentStyled></NavBarContentStyled>
-            <NavBarItemStyled>Home</NavBarItemStyled>
-            <NavBarItemStyled>Séries</NavBarItemStyled>
-            <NavBarItemStyled>Filmes</NavBarItemStyled>
-            <NavBarItemStyled>Bombando</NavBarItemStyled>
-            <NavBarItemStyled>Minha Lista</NavBarItemStyled>
-            <NavBarItemStyled>Navegar por idiomas</NavBarItemStyled>
+            <NavBarItemStyled onClick={() => router.push('/list-routes')}>Listar Rotas</NavBarItemStyled>
+            <NavBarItemStyled onClick={() => router.push('/register-passenger')}>Registrar Passageiro</NavBarItemStyled>
+            <NavBarItemStyled onClick={() => router.push('/register-companie')}>Registrar Empresa</NavBarItemStyled>
+            <NavBarItemStyled onClick={() => router.push('/register-route')}>Registrar Rota</NavBarItemStyled>
         </NavBarContainerStyled>
     )
 }

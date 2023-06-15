@@ -1,9 +1,14 @@
-import PassegerDetailScreen from '@/components/pages/passenger-detail'
+import NavBar from '@/components/nav-bar'
 import RouteDetailScreen from '@/components/pages/route-detail'
 import { NextPage } from 'next'
 
 const RouteDetail: NextPage = () => {
-    return <RouteDetailScreen />
+    return (
+        <>
+            <NavBar />
+            <RouteDetailScreen />
+        </>
+    )
 }
 
 export default RouteDetail
