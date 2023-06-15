@@ -112,7 +112,9 @@ const postCheckin = async (cpf: string): Promise<any | Error> => {
 
 const postCorrida = async (route: any): Promise<any | Error> => {
     try {
-        const data = await Api.post(`/corrida/`)
+        const data = await Api.post(`/corrida`, {
+            rota: route
+        })
 
         if (data.data) {
             return data.data
