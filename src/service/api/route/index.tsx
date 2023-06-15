@@ -110,6 +110,23 @@ const postCheckin = async (cpf: string): Promise<any | Error> => {
     }
 }
 
+const postCorrida = async (route: any): Promise<any | Error> => {
+    try {
+        const data = await Api.post(`/corrida/`)
+
+        if (data.data) {
+            return data.data
+        }
+
+        return new Error('Erro.')
+    } catch (error) {
+        return new Error(
+            (error as { message: string }).message ||
+                'Erro ao cadastrar empresa.'
+        )
+    }
+}
+
 const postPassengers = async (
     passengerName: string,
     passengerCpf: string,
@@ -175,5 +192,6 @@ export const RouteService = {
     postCompanie,
     postPassengers,
     postRoute,
-    postCheckin
+    postCheckin,
+    postCorrida
 }

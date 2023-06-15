@@ -5,6 +5,7 @@ import { BodyContainerStyled, ContainerStyled, ContentStyled, TextStyled, TextSt
 import { useRouter } from 'next/router'
 import { RouteService } from '@/service/api/route'
 import { ListBox } from '@/components/list-box'
+import { ButtonCheckIn } from '@/components/button'
 
 const RouteDetailScreen: FunctionComponent = () => {
     const isMobile = DeviceDetect().isMobile
@@ -26,6 +27,10 @@ const RouteDetailScreen: FunctionComponent = () => {
         fetchData()
     }, [query])
 
+    async function handleClickButton() {
+        await RouteService.postCorrida(route)
+    }
+
     return (
         <Layout isMobile={isMobile}>
             <BodyContainerStyled>
@@ -36,6 +41,9 @@ const RouteDetailScreen: FunctionComponent = () => {
                         <TextStyledDarkBlue>Empresa: {route?.empresa.nome}</TextStyledDarkBlue>
                         <TextStyled>Passageiros:</TextStyled>
                         <ListBox itens={route?.passageiros} listType='passenger' hasCheckBox={false}/>
+                        <ButtonCheckIn onClick={handleClickButton} isMobile={isMobile}>
+                            Iniciar corrida
+                        </ButtonCheckIn>
                     </ContentStyled>
                 </ContainerStyled>
             </BodyContainerStyled>
