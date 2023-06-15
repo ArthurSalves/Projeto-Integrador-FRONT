@@ -30,11 +30,9 @@ const ListPassengersScreen: FunctionComponent = () => {
 
     }
 
-
     const handleDeletePassenger = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
         PassengerService.deletePassenger(buildDeletePassenger(deletedPassenger))
-
     }
 
     const handleSetDeletePassenger = (id: string) => {
@@ -43,13 +41,10 @@ const ListPassengersScreen: FunctionComponent = () => {
             passengers = deletedPassenger.filter((passenger:any) => {
                 passenger !== id
             })
-        }else {
+        } else {
             setDeletedPassenger([...deletedPassenger, id])
         }
-        
-
     }
-
 
     return (
         <Layout isMobile={isMobile}>

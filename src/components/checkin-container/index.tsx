@@ -8,7 +8,7 @@ import {
 } from './styles'
 import { DefaultInput } from '../input'
 import { ButtonCheckIn } from '../button'
-import { useAuthContext } from '@/contexts/auth'
+import { RouteService } from '@/service/api/route'
 import React, { useState } from 'react'
 
 interface Props {
@@ -17,18 +17,12 @@ interface Props {
 
 const CheckInContainer: React.FC<Props> = ({ setIsChecked }) => {
     const isMobile = DeviceDetect().isMobile
-    const { login } = useAuthContext()
-    const [name, setName] = useState('')
     const [cpf, setCpf] = useState('')
 
     const handleLogin = async (e: React.MouseEvent) => {
         e.preventDefault()
-        setIsChecked(true)
-    }
-
-    const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault()
-        setName(e.target.value)
+        await RouteService.postCheckin(cpf)
+        setIsChecked(true)  
     }
 
     const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,14 +38,6 @@ const CheckInContainer: React.FC<Props> = ({ setIsChecked }) => {
                     <SubTitleCheckInStyled>
                         Complete Seus Dados Para Fazer Check-In
                     </SubTitleCheckInStyled>
-                    <DefaultInput
-                        isMobile={isMobile}
-                        label="Nome"
-                        value={name}
-                        id="inputName"
-                        type="text"
-                        onChangeInput={e => handleChangeEmail(e)}
-                    />
                     <DefaultInput
                         isMobile={isMobile}
                         label="CPF"

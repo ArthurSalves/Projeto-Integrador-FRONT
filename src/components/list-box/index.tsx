@@ -29,26 +29,33 @@ interface Props {
     setCheckBox: any
 }
 
-export const ListBox: FunctionComponent<Props> = ({ itens, hasCheckBox, listType, setCheckBox, ...props }) => {
+export const ListBox: FunctionComponent<Props> = ({
+    itens,
+    hasCheckBox,
+    listType,
+    setCheckBox,
+    ...props
+}) => {
     return (
         <UlStyled>
             {itens?.map(item => {
                 return (
-                    <LiStyled key={item._id}>
-                        <NameButton item={item} listType={listType}/>
-                        {hasCheckBox && <div className="checkbox-wrapper-7">
-                            <input
-                                className="tgl tgl-ios"
-                                id={item._id.toString()}
-                                type="checkbox"
-                                onChange={() =>setCheckBox(item._id)}
-                            />
-                            <label
-                                className="tgl-btn"
-                                htmlFor={item._id.toString()}
-                            />
-                        </div>}
-                        
+                    <LiStyled key={item?._id}>
+                        <NameButton item={item} listType={listType} />
+                        {hasCheckBox && (
+                            <div className="checkbox-wrapper-7">
+                                <input
+                                    className="tgl tgl-ios"
+                                    id={item?._id.toString()}
+                                    type="checkbox"
+                                    onChange={() => setCheckBox(item?._id)}
+                                />
+                                <label
+                                    className="tgl-btn"
+                                    htmlFor={item?._id.toString()}
+                                />
+                            </div>
+                        )}
                     </LiStyled>
                 )
             })}
