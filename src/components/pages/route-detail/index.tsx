@@ -59,7 +59,7 @@ const RouteDetailScreen: FunctionComponent = () => {
                             Empresa: {route?.empresa?.nome}
                         </TextStyledDarkBlue>
                         <TextStyled>Passageiros a embarcar:</TextStyled>                       
-                        <ListBox itens={route?.passageiros.filter((passageiro: any) => !corrida.passageirosValidados.map((pv: any) => pv.cpf).includes(passageiro.cpf))} listType='passenger' hasCheckBox={false} setCheckBox={null} />
+                        <ListBox itens={corrida?.rota ? route?.passageiros.filter((passageiro: any) =>  !corrida?.passageirosValidados.map((pv: any) => pv.cpf).includes(passageiro.cpf)): route?.passageiros} listType='passenger' hasCheckBox={false} setCheckBox={null} />
                         <p>---------------------------------------------</p>
                         <TextStyled>Passageiros embarcados:</TextStyled>                       
                         <ListBox itens={corrida?.passageirosValidados} listType='passenger' hasCheckBox={false} setCheckBox={null}/>
