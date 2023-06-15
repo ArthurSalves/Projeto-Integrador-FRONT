@@ -2,7 +2,9 @@
 
 const nextConfig = {
     publicRuntimeConfig: {
-        BACK_HOST: process.env.NEXT_PUBLIC_BACK_HOST || 'http://localhost:8080'
+        BACK_HOST:
+            process.env.NEXT_PUBLIC_BACK_HOST ||
+            'https://squid-app-6o8u6.ondigitalocean.app'
     }
 }
 
