@@ -27,30 +27,24 @@ const ListPassengersScreen: FunctionComponent = () => {
     }, [])
 
     const buildDeletePassenger = (passengers: Array<any>) => {
-        return passengers.map((passenger) => passenger.id)
-
+        return passengers.map(passenger => passenger.id)
     }
-
 
     const handleDeletePassenger = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
         PassengerService.deletePassenger(buildDeletePassenger(deletedPassenger))
-
     }
 
     const handleSetDeletePassenger = (id: string) => {
         var passengers
-        if(deletedPassenger.includes(id)){
-            passengers = deletedPassenger.filter((passenger) => {
+        if (deletedPassenger.includes(id)) {
+            passengers = deletedPassenger.filter(passenger => {
                 passenger !== id
             })
-        }else {
+        } else {
             setDeletedPassenger([...deletedPassenger, id])
         }
-        
-
     }
-
 
     return (
         <Layout isMobile={isMobile}>
@@ -60,8 +54,18 @@ const ListPassengersScreen: FunctionComponent = () => {
                         <TitleStyled>
                             Lista de <br /> Passageiros
                         </TitleStyled>
-                        <ListBox itens={passengers} hasCheckBox={true} listType='passenger' setCheckBox={() => handleSetDeletePassenger()}/>
-                        <ButtonCheckIn isMobile={true} onClick={(e) => handleDeletePassenger(e)}>Remover Passageiros</ButtonCheckIn>
+                        <ListBox
+                            itens={passengers}
+                            hasCheckBox={true}
+                            listType="passenger"
+                            setCheckBox={() => handleSetDeletePassenger()}
+                        />
+                        <ButtonCheckIn
+                            isMobile={true}
+                            onClick={e => handleDeletePassenger(e)}
+                        >
+                            Remover Passageiros
+                        </ButtonCheckIn>
                     </ContentStyled>
                 </ContainerStyled>
             </BodyContainerStyled>
