@@ -26,9 +26,10 @@ interface Props {
     itens: [PassengerType | RouteType] | null
     hasCheckBox: boolean
     listType: string
+    setCheckBox: any
 }
 
-export const ListBox: FunctionComponent<Props> = ({ itens, hasCheckBox, listType, ...props }) => {
+export const ListBox: FunctionComponent<Props> = ({ itens, hasCheckBox, listType, setCheckBox, ...props }) => {
     return (
         <UlStyled>
             {itens?.map(item => {
@@ -40,6 +41,7 @@ export const ListBox: FunctionComponent<Props> = ({ itens, hasCheckBox, listType
                                 className="tgl tgl-ios"
                                 id={item._id.toString()}
                                 type="checkbox"
+                                onChange={() =>setCheckBox(item._id)}
                             />
                             <label
                                 className="tgl-btn"

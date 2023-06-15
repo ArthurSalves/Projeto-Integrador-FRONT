@@ -32,7 +32,7 @@ const ListRoutesScreen: FunctionComponent = () => {
                         <TitleStyled>
                             Lista de Rotas
                         </TitleStyled>
-                        <ListBox itens={routes} hasCheckBox={false} listType='route' />
+                        <ListBox itens={routes} hasCheckBox={false} listType='route' setCheckBox={false} />
                     </ContentStyled>
                 </ContainerStyled>
             </BodyContainerStyled>

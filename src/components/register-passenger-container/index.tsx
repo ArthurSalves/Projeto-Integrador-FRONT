@@ -20,9 +20,9 @@ const RegisterPassengerContainer: React.FC<Props> = ({ setIsChecked }) => {
     const isMobile = DeviceDetect().isMobile
     const [name, setName] = useState('')
     const [cpf, setCpf] = useState('')
-    const [companies, setCompanies] = useState([])
-    const [companiesFiltered, setCompaniesFiltered] = useState([])
-    const [companieSelected, setCompanieSelectedId] = useState('')
+    const [routes, setRoutes] = useState([])
+    const [routesFiltered, setRoutesFiltered] = useState([])
+    const [routeSelected, setRouteSelectedId] = useState('')
     const [endereco, setEndereco] = useState('')
     const [codigoFuncionario, setCodigoFuncionario] = useState('')
 
@@ -32,7 +32,7 @@ const RegisterPassengerContainer: React.FC<Props> = ({ setIsChecked }) => {
             name,
             cpf,
             endereco,
-            companieSelected,
+            routeSelected,
             codigoFuncionario
         )
         setIsChecked(true)
@@ -58,22 +58,22 @@ const RegisterPassengerContainer: React.FC<Props> = ({ setIsChecked }) => {
         setEndereco(e.target.value)
     }
 
-    const handleChangeEmpresa = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleChangeRoute= (e: React.ChangeEvent<HTMLSelectElement>) => {
         e.preventDefault()
-        setCompanieSelectedId(e.target.value)
+        setRouteSelectedId(e.target.value)
     }
 
-    const buildOptions = (companies: any) => {
-        return companies.map((companie: any) => {
-            return { value: companie._id.toString(), label: companie.nome }
+    const buildOptions = (routes: any) => {
+        return routes.map((route: any) => {
+            return { value: route._id.toString(), label: route.nome }
         })
     }
 
     useEffect(() => {
         const fetchData = async () => {
-            const companies = await RouteService.getCompanies()
-            setCompaniesFiltered(buildOptions(companies))
-            setCompanies(companies)
+            const routes = await RouteService.getRoutes()
+            setRoutesFiltered(buildOptions(routes))
+            setRoutes(routes)
         }
         fetchData()
     }, [])
@@ -122,11 +122,11 @@ const RegisterPassengerContainer: React.FC<Props> = ({ setIsChecked }) => {
                     />
                     <DropBox
                         isMobile={isMobile}
-                        label="Empresa"
-                        value={companieSelected}
-                        id="inputEmpresa"
-                        options={companiesFiltered}
-                        onChangeInput={e => handleChangeEmpresa(e)}
+                        label="Rota"
+                        value={routeSelected}
+                        id="inputRota"
+                        options={routesFiltered}
+                        onChangeInput={e => handleChangeRoute(e)}
                     />
                     <ButtonCheckIn
                         isMobile={isMobile}

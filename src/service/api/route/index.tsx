@@ -97,7 +97,7 @@ const postPassengers = async (
     passengerName: string,
     passengerCpf: string,
     endereco: string,
-    empresa: string,
+    rota: string,
     codigoFuncionario: string
 ): Promise<any | Error> => {
     try {
@@ -105,7 +105,36 @@ const postPassengers = async (
             nome: passengerName,
             cpf: passengerCpf,
             codigoFuncionario,
-            empresa,
+            rota,
+            endereco
+        })
+
+        if (data.data) {
+            return data.data
+        }
+
+        return new Error('Erro.')
+    } catch (error) {
+        return new Error(
+            (error as { message: string }).message ||
+                'Erro ao cadastrar passageiros.'
+        )
+    }
+}
+
+const deletePassenger = async (
+    passengerName: string,
+    passengerCpf: string,
+    endereco: string,
+    rota: string,
+    codigoFuncionario: string
+): Promise<any | Error> => {
+    try {
+        const data = await Api.post('/passageiro', {
+            nome: passengerName,
+            cpf: passengerCpf,
+            codigoFuncionario,
+            rota,
             endereco
         })
 

@@ -7,7 +7,6 @@ interface Props {
 export const ContentStyled = styled.div<Props>`
     border-radius: 4px;
     box-sizing: border-box;
-    justify-content: flex-end;
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -30,9 +29,8 @@ export const TitleStyled = styled.h1`
     color: #738290;
     font-size: 32px;
     font-weight: 500;
-    position: absolute;
-    top: 60px;
     font-weight: 600;
+    margin-bottom: 50px;
 `
 
 export const BackgroundLayerStyled = styled.div`
