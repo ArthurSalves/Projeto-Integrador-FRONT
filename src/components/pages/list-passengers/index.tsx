@@ -9,13 +9,12 @@ import {
 import { FunctionComponent, useEffect, useState } from 'react'
 import { ListBox } from '@/components/list-box'
 import { PassengerService } from '@/service/api/passenger'
-import { NameButton } from '@/components/name-button'
 import { ButtonCheckIn } from '@/components/button'
 
 const ListPassengersScreen: FunctionComponent = () => {
     const isMobile = DeviceDetect().isMobile
     const [passengers, setPassengers] = useState(null)
-    const [deletedPassenger, setDeletedPassenger] = useState([])
+    const [deletedPassenger, setDeletedPassenger] = useState<any>([])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,8 +25,8 @@ const ListPassengersScreen: FunctionComponent = () => {
         fetchData()
     }, [])
 
-    const buildDeletePassenger = (passengers: Array<any>) => {
-        return passengers.map((passenger) => passenger.id)
+    const buildDeletePassenger = (passengers: any) => {
+        return passengers.map((passenger: any) => passenger.id)
 
     }
 
@@ -41,7 +40,7 @@ const ListPassengersScreen: FunctionComponent = () => {
     const handleSetDeletePassenger = (id: string) => {
         var passengers
         if(deletedPassenger.includes(id)){
-            passengers = deletedPassenger.filter((passenger) => {
+            passengers = deletedPassenger.filter((passenger:any) => {
                 passenger !== id
             })
         }else {
@@ -60,8 +59,8 @@ const ListPassengersScreen: FunctionComponent = () => {
                         <TitleStyled>
                             Lista de <br /> Passageiros
                         </TitleStyled>
-                        <ListBox itens={passengers} hasCheckBox={true} listType='passenger' setCheckBox={() => handleSetDeletePassenger()}/>
-                        <ButtonCheckIn isMobile={true} onClick={(e) => handleDeletePassenger(e)}>Remover Passageiros</ButtonCheckIn>
+                        <ListBox itens={passengers} hasCheckBox={true} listType='passenger' setCheckBox={null}/>
+                        <ButtonCheckIn isMobile={true} onClick={(e: any) => handleDeletePassenger(e)}>Remover Passageiros</ButtonCheckIn>
                     </ContentStyled>
                 </ContainerStyled>
             </BodyContainerStyled>

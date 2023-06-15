@@ -36,7 +36,7 @@ const getRoutes = async (): Promise<any | Error> => {
     }
 }
 
-const getRouteById = async (id: string): Promise<any | Error> => {
+const getRouteById = async (id: any): Promise<any | Error> => {
     try {
         const data = await Api.get(`/rota/${id}`)
 

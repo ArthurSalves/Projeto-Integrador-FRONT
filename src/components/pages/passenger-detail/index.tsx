@@ -14,7 +14,7 @@ import { PassengerService } from '@/service/api/passenger'
 
 const PassegerDetailScreen: FunctionComponent = () => {
     const isMobile = DeviceDetect().isMobile
-    const [passenger, setPassenger] = useState({})
+    const [passenger, setPassenger] = useState<any>({})
 
     const { query } = useRouter()
 
