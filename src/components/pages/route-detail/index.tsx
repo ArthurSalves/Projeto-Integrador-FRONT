@@ -22,8 +22,6 @@ const RouteDetailScreen: FunctionComponent = () => {
     const { query } = useRouter()
 
     useEffect(() => {
-        console.log(query.id)
-
         const fetchData = async () => {
             const route = await RouteService.getRouteById(query.id?.toString())
             console.log('id', route)
@@ -33,7 +31,7 @@ const RouteDetailScreen: FunctionComponent = () => {
     }, [query])
 
     async function handleClickButton() {
-        await RouteService.postCorrida(route)
+        await RouteService.postCorrida(query.id)
     }
 
     return (
@@ -52,7 +50,10 @@ const RouteDetailScreen: FunctionComponent = () => {
                             listType="passenger"
                             hasCheckBox={false}
                         />
-                        <ButtonCheckIn onClick={handleClickButton} isMobile={isMobile}>
+                        <ButtonCheckIn
+                            onClick={handleClickButton}
+                            isMobile={isMobile}
+                        >
                             Iniciar corrida
                         </ButtonCheckIn>
                     </ContentStyled>
