@@ -25,7 +25,7 @@ const isPassenger = (type: string) => {
 }
 
 const handleChangeButton = (
-    item: Passenger | CompanieType,
+    item: any,
     e: any,
     type: string
 ) => {

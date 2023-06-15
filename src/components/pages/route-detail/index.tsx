@@ -17,7 +17,7 @@ import { ButtonCheckIn } from '@/components/button'
 
 const RouteDetailScreen: FunctionComponent = () => {
     const isMobile = DeviceDetect().isMobile
-    const [route, setRoute] = useState(null)
+    const [route, setRoute] = useState<any>(null)
 
     const { query } = useRouter()
 
@@ -47,11 +47,8 @@ const RouteDetailScreen: FunctionComponent = () => {
                             Empresa: {route?.empresa?.nome}
                         </TextStyledDarkBlue>
                         <TextStyled>Passageiros:</TextStyled>
-                        <ListBox
-                            itens={route?.passageiros}
-                            listType="passenger"
-                            hasCheckBox={false}
-                        />
+                        
+                        <ListBox itens={route?.passageiros} listType='passenger' hasCheckBox={false} setCheckBox={null}/>
                         <ButtonCheckIn onClick={handleClickButton} isMobile={isMobile}>
                             Iniciar corrida
                         </ButtonCheckIn>
