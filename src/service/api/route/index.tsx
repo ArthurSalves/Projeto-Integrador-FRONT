@@ -158,35 +158,6 @@ const postPassengers = async (
     }
 }
 
-const deletePassenger = async (
-    passengerName: string,
-    passengerCpf: string,
-    endereco: string,
-    rota: string,
-    codigoFuncionario: string
-): Promise<any | Error> => {
-    try {
-        const data = await Api.post('/passageiro', {
-            nome: passengerName,
-            cpf: passengerCpf,
-            codigoFuncionario,
-            rota,
-            endereco
-        })
-
-        if (data.data) {
-            return data.data
-        }
-
-        return new Error('Erro.')
-    } catch (error) {
-        return new Error(
-            (error as { message: string }).message ||
-                'Erro ao cadastrar passageiros.'
-        )
-    }
-}
-
 export const RouteService = {
     getCompanies,
     getRouteById,
