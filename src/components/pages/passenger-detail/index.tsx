@@ -23,6 +23,7 @@ const PassegerDetailScreen: FunctionComponent = () => {
             const passenger = await PassengerService.getPassenger(
                 query?.codigoFuncionario?.toString()
             )
+
             setPassenger(passenger[0])
         }
         fetchData()
@@ -39,7 +40,7 @@ const PassegerDetailScreen: FunctionComponent = () => {
                             Endereço: {passenger?.endereco}
                         </TextStyledDarkBlue>
                         <TextStyledBlue>
-                            Empresa: {passenger?.empresa}
+                            Rota: {passenger?.rota?.nome}
                         </TextStyledBlue>
                     </ContentStyled>
                 </ContainerStyled>

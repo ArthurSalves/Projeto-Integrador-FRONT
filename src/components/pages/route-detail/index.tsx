@@ -1,7 +1,15 @@
 import Layout from '@/components/layout'
 import DeviceDetect from '@/utils/deviceDetect'
 import { FunctionComponent, useEffect, useState } from 'react'
-import { BodyContainerStyled, ContainerStyled, ContentStyled, TextStyled, TextStyledBlue, TextStyledDarkBlue, TitleStyled } from './styles'
+import {
+    BodyContainerStyled,
+    ContainerStyled,
+    ContentStyled,
+    TextStyled,
+    TextStyledBlue,
+    TextStyledDarkBlue,
+    TitleStyled
+} from './styles'
 import { useRouter } from 'next/router'
 import { RouteService } from '@/service/api/route'
 import { ListBox } from '@/components/list-box'
@@ -13,15 +21,12 @@ const RouteDetailScreen: FunctionComponent = () => {
     const { query } = useRouter()
 
     useEffect(() => {
-        console.log(query);
-        
+        console.log(query.id)
+
         const fetchData = async () => {
-            const route = await RouteService.getRouteById(
-                query.id?.toString()
-            )
-            console.log(route)
+            const route = await RouteService.getRouteById(query.id?.toString())
+            console.log('id', route)
             setRoute(route)
-            
         }
         fetchData()
     }, [query])
@@ -33,9 +38,15 @@ const RouteDetailScreen: FunctionComponent = () => {
                     <ContentStyled>
                         <TitleStyled>Detalhe da Rota</TitleStyled>
                         <TextStyledBlue>Nome: {route?.nome}</TextStyledBlue>
-                        <TextStyledDarkBlue>Empresa: {route?.empresa.nome}</TextStyledDarkBlue>
+                        <TextStyledDarkBlue>
+                            Empresa: {route?.empresa?.nome}
+                        </TextStyledDarkBlue>
                         <TextStyled>Passageiros:</TextStyled>
-                        <ListBox itens={route?.passageiros} listType='passenger' hasCheckBox={false}/>
+                        <ListBox
+                            itens={route?.passageiros}
+                            listType="passenger"
+                            hasCheckBox={false}
+                        />
                     </ContentStyled>
                 </ContainerStyled>
             </BodyContainerStyled>
