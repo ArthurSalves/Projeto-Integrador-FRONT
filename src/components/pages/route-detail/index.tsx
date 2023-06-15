@@ -18,21 +18,35 @@ import { ButtonCheckIn } from '@/components/button'
 const RouteDetailScreen: FunctionComponent = () => {
     const isMobile = DeviceDetect().isMobile
     const [route, setRoute] = useState<any>(null)
+    const [corrida, setCorrida] = useState<any>(null)
+    const [isIniciada, setIsIniciada] = useState(false)
 
-    const { query } = useRouter()
+    const { query, isReady } = useRouter()
 
     useEffect(() => {
-        const fetchData = async () => {
-            const route = await RouteService.getRouteById(query.id?.toString())
-            console.log('id', route)
-            setRoute(route)
+        if(isReady) {
+            const fetchData = async () => {
+                const route = await RouteService.getRouteById(query.id?.toString())
+                const corrida = await RouteService.getCorrida(query.id)
+                setRoute(route)
+                setCorrida(corrida)
+            }
+            fetchData()
         }
-        fetchData()
-    }, [query])
+    }, [query, isReady])
 
     async function handleClickButton() {
+        if(isIniciada) {
+            await RouteService.updateCorrida(query.id, isIniciada)
+            setIsIniciada(false)
+            return
+        }
+
         await RouteService.postCorrida(query.id)
+        setIsIniciada(true)
     }
+
+    console.log(corrida, route)
 
     return (
         <Layout isMobile={isMobile}>
@@ -44,15 +58,19 @@ const RouteDetailScreen: FunctionComponent = () => {
                         <TextStyledDarkBlue>
                             Empresa: {route?.empresa?.nome}
                         </TextStyledDarkBlue>
-                        <TextStyled>Passageiros:</TextStyled>
-                        
-                        <ListBox itens={route?.passageiros} listType='passenger' hasCheckBox={false} setCheckBox={null}/>
+                        <TextStyled>Passageiros a embarcar:</TextStyled>                       
+                        <ListBox itens={route?.passageiros.filter((passageiro: any) => !corrida.passageirosValidados.map((pv: any) => pv.cpf).includes(passageiro.cpf))} listType='passenger' hasCheckBox={false} setCheckBox={null} />
+                        <p>---------------------------------------------</p>
+                        <TextStyled>Passageiros embarcados:</TextStyled>                       
+                        <ListBox itens={corrida?.passageirosValidados} listType='passenger' hasCheckBox={false} setCheckBox={null}/>
+ 
                         <ButtonCheckIn
                             onClick={handleClickButton}
                             isMobile={isMobile}
                         >
-                            Iniciar corrida
+                           {isIniciada ? 'Finalizar Corrida' : 'Iniciar corrida'}
                         </ButtonCheckIn>
+                        
                     </ContentStyled>
                 </ContainerStyled>
             </BodyContainerStyled>

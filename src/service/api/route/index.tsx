@@ -129,6 +129,43 @@ const postCorrida = async (route: any): Promise<any | Error> => {
     }
 }
 
+const getCorrida = async (id: any): Promise<any | Error> => {
+    try {
+        const data = await Api.get(`/corrida/${id}`)
+
+        if (data.data) {
+            return data.data
+        }
+
+        return new Error('Erro.')
+    } catch (error) {
+        return new Error(
+            (error as { message: string }).message ||
+                'Erro ao cadastrar empresa.'
+        )
+    }
+}
+
+const updateCorrida = async (route: any, isIniciada: boolean): Promise<any | Error> => {
+    try {
+        const data = await Api.patch(`/corrida`, {
+            rota: route,
+            isIniciada: isIniciada
+        })
+
+        if (data.data) {
+            return data.data
+        }
+
+        return new Error('Erro.')
+    } catch (error) {
+        return new Error(
+            (error as { message: string }).message ||
+                'Erro ao cadastrar empresa.'
+        )
+    }
+}
+
 const postPassengers = async (
     passengerName: string,
     passengerCpf: string,
@@ -162,6 +199,8 @@ export const RouteService = {
     getCompanies,
     getRouteById,
     getRoutes,
+    getCorrida,
+    updateCorrida,
     postCompanie,
     postPassengers,
     postRoute,
